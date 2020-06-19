@@ -19,6 +19,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
+                        <!-- Main Layout Page with Home,Privacy,About Us, Category -->
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
@@ -41,7 +42,7 @@
             @RenderBody()
         </main>
     </div>
-
+    <!-- Footer with Name and credits.-->
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2020 - GetThatLook - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>- Harpreet Kaur(200425194). Credits-<a href="https://Bootswatch.com">Bootswatch</a>

@@ -12,25 +12,27 @@ namespace GetThatLook.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
+        
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
-
+        // Index Page
         public IActionResult Index()
         {
             return View();
         }
-
+        // Privacy Page
         public IActionResult Privacy()
         {
             return View();
         }
+        // About Page
         public IActionResult About()
         {
             return View();
         }
+        // Category Page
         public IActionResult Category()
         {
             return View();
