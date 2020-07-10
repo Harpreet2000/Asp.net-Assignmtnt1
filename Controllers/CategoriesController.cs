@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GetThatLook.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GetThatLook.Controllers
 {
+    [Authorize (Roles ="Employee")]
     public class CategoriesController : Controller
     {
         private readonly GetThatLookContext _context;
@@ -19,6 +21,7 @@ namespace GetThatLook.Controllers
         }
 
         // GET: Categories
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Category.ToListAsync());
@@ -31,6 +34,7 @@ namespace GetThatLook.Controllers
             {
                 return NotFound();
             }
+
 
             var category = await _context.Category
                 .FirstOrDefaultAsync(m => m.CategoryId == id);

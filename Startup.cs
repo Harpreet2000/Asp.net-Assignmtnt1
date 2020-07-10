@@ -31,8 +31,20 @@ namespace GetThatLook
             services.AddDbContext<GetThatLookContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<GetThatLookContext>();
+            //Configure Identity to work with out DBase
+            //Use our new ApplicationRole class to manage Roles and Permissions 
+            //point Identity to the existing GetThatLook DBase Context Class
+            //Use Default Cookies setting
+            
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
+                .AddDefaultUI()
+                .AddRoles<ApplicationRole>()
+                .AddRoleManager<RoleManager<ApplicationRole>>()
+                .AddEntityFrameworkStores<GetThatLookContext>()
+                .AddDefaultTokenProviders();
+                    
+            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            //    .AddEntityFrameworkStores<GetThatLookContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
         }

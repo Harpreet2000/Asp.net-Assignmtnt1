@@ -1,10 +1,13 @@
 ﻿using System;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace GetThatLook.Models
 {
-    public partial class GetThatLookContext : DbContext
+    //MODIFY the DbContext to handle the User Identities and the Roles
+    //Last parameter indicated the PK of Userid value as a string
+    public partial class GetThatLookContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
         public GetThatLookContext()
         {
@@ -23,13 +26,16 @@ namespace GetThatLook.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=(local);Initial Catalog=GetThatLook;Integrated Security=True");
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+  //              optionsBuilder.UseSqlServer("Data Source=(local);Initial Catalog=GetThatLook;Integrated Security=True");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //Add to get Identity to work! This is a Bug Fix!
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Category>(entity =>
             {
                 entity.Property(e => e.CategoryName).IsUnicode(false);
